@@ -1,0 +1,18 @@
+# Stock MiuiCamera (agate, V14.0.6.0.TKWMIXM)
+# The app is a /product app and its native loader namespace only permits /product/lib64,
+# so the JNI libraries are moved there (src:dst).
+product/priv-app/MiuiCamera/MiuiCamera.apk;OVERRIDES=Camera2,Snap
+product/etc/device_features/agate.xml
+product/etc/device_features/amber.xml
+system/lib64/libcamera_algoup_jni.xiaomi.so:product/lib64/libcamera_algoup_jni.xiaomi.so;DISABLE_CHECKELF
+system/lib64/libcamera_ispinterface_jni.xiaomi.so:product/lib64/libcamera_ispinterface_jni.xiaomi.so;DISABLE_CHECKELF
+system/lib64/libcamera_mianode_jni.xiaomi.so:product/lib64/libcamera_mianode_jni.xiaomi.so;DISABLE_CHECKELF
+system/lib64/libmtkisp_metadata_sys.so:product/lib64/libmtkisp_metadata_sys.so;DISABLE_CHECKELF
+
+# MiAlgo engine, linked against the CallStack free libutils below
+vendor/lib64/libmialgoengine.so;DISABLE_CHECKELF
+vendor/lib64/libmialgoengine2.so;DISABLE_CHECKELF
+
+# Not a stock file: libutils-v32-nocs is built from the Lineage libutils-v32 prebuilt in the
+# blob fixup, the stock libutils is only the placeholder source (see extract-files.py)
+system/lib64/libutils.so:vendor/lib64/libutils-v32-nocs.so;DISABLE_CHECKELF

@@ -76,6 +76,10 @@ module = ExtractUtilsModule(
     device_rel_path='vendor/xiaomi/agate-miuicamera',
     blob_fixups=blob_fixups,
     lib_fixups=lib_fixups,
+    namespace_imports=[
+        'vendor/xiaomi/agate',
+        'vendor/xiaomi/mt6893-common',
+    ],
 )
 
 if __name__ == '__main__':

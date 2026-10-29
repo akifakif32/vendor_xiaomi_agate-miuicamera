@@ -3,6 +3,10 @@
 //
 
 soong_namespace {
+    imports: [
+        "vendor/xiaomi/agate",
+        "vendor/xiaomi/mt6893-common",
+    ],
 }
 
 cc_prebuilt_library_shared {

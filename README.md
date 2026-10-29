@@ -9,13 +9,15 @@ as a privileged, platform signed app.
 ./setup-blobs.sh ~/agate_dump
 ```
 
-Copies the app, the JNI libraries and the device features from the stock dump and builds
-`libutils-v32-nocs`, a copy of the Lineage `libutils-v32` with the CallStack hooks disabled
-(otherwise every camera mode switch takes several seconds because of the RefBase backtraces).
+Copies the app, the JNI libraries, the MiAlgo engine and the device features from the stock dump.
 
-The MiAlgo libraries come from the device blob repo, `libmialgoengine` and `libmialgoengine2`
-are linked against `libutils-v32-nocs` by `blob_fixups` in `device/xiaomi/agate/extract-files.py`.
-Git LFS is recommended for the APK and the libraries.
+`libmialgoengine` and `libmialgoengine2` are linked against `libutils-v32-nocs`, a copy of the
+Lineage `libutils-v32` with the CallStack hooks disabled. The stock engine destroys hundreds of
+RefBase objects on every camera mode switch, with the stock `libutils` each of them prints a
+backtrace and a mode switch takes several seconds.
+
+The other MiAlgo libraries (`libmialgo_utils`, `_sd`, `_video_enhance`, `_ie_capture`) are used by
+the camera HAL and come from the device blob repo (`vendor/xiaomi/agate`).
 
 ## Device tree
 

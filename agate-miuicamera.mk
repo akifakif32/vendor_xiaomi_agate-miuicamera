@@ -18,10 +18,6 @@ PRODUCT_PACKAGES += \
     libcamera_ispinterface_jni.xiaomi \
     libcamera_mianode_jni.xiaomi \
     libmtkisp_metadata_sys \
-    libmialgo_ie_capture \
-    libmialgo_sd \
-    libmialgo_utils \
-    libmialgo_video_enhance \
     libmialgoengine \
     libmialgoengine2 \
     libutils-v32-nocs

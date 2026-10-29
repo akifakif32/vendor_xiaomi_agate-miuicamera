@@ -12,9 +12,10 @@ cd vendor/xiaomi/agate-miuicamera
 
 ## Notes
 
-- The app lives in `/product`, the native loader namespace of such apps only permits
-  `/product/lib64`. The JNI libraries are therefore moved from `system/lib64` to
-  `product/lib64` (`src:dst` in `proprietary-files.txt`).
+- The app and its JNI libraries are installed in `/system` (`system/priv-app`, `system/lib64`).
+  They link against private platform libraries (`libgui`, `libbinder`) and an app in `/product`
+  may only load the public ones. The permission files are in `/system/etc` for the same reason,
+  privileged permissions are only granted from the partition of the app.
 - `libmialgoengine` and `libmialgoengine2` are linked against `libutils-v32-nocs`, a copy of
   the Lineage `libutils-v32` with the CallStack hooks disabled (blob fixup in
   `extract-files.py`, needs `hardware/lineage` in the tree). The stock engine destroys hundreds

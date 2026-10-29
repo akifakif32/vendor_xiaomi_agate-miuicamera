@@ -11,9 +11,6 @@ cp "$D/product/etc/device_features/agate.xml" "$D/product/etc/device_features/am
 for l in libcamera_algoup_jni.xiaomi libcamera_ispinterface_jni.xiaomi libcamera_mianode_jni.xiaomi libmtkisp_metadata_sys; do
   cp "$D/system/lib64/$l.so" proprietary/system/lib64/
 done
-for l in libmialgo_ie_capture libmialgo_sd libmialgo_utils libmialgo_video_enhance libmialgoengine libmialgoengine2; do
-  cp "$D/vendor/lib64/$l.so" proprietary/vendor/lib64/
-done
 # libutils-v32 without the CallStack hooks (own SONAME so bionic does not reuse the stock one)
 U=$(ls "$HOME"/infinity/hardware/lineage/compat/vndk/v32/arm64/libutils-v32.so "$HOME"/Masaüstü/rom/hardware/lineage/compat/vndk/v32/arm64/libutils-v32.so 2>/dev/null | head -1)
 [ -n "$U" ] || { echo "libutils-v32.so (hardware/lineage/compat/vndk/v32/arm64) bulunamadi"; exit 1; }
@@ -30,7 +27,4 @@ if n<2: sys.exit("CallStack sembolleri bulunamadi: %d" % n)
 open(sys.argv[2],'wb').write(d)
 PY
 "$PE" --set-soname libutils-v32-nocs.so proprietary/vendor/lib64/libutils-v32-nocs.so
-for l in libmialgoengine libmialgoengine2; do
-  "$PE" --replace-needed libutils.so libutils-v32-nocs.so proprietary/vendor/lib64/$l.so
-done
 echo "tamam. git lfs kuruluysa: git lfs install && git add -A"

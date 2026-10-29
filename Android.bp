@@ -1,0 +1,218 @@
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+soong_namespace {
+}
+
+android_app_import {
+    name: "MiuiCamera",
+    owner: "xiaomi",
+    apk: "proprietary/product/priv-app/MiuiCamera/MiuiCamera.apk",
+    certificate: "platform",
+    dex_preopt: {
+        enabled: false,
+    },
+    enforce_uses_libs: false,
+    overrides: [
+        "Camera2",
+        "Snap",
+    ],
+    privileged: true,
+    product_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libcamera_algoup_jni.xiaomi",
+    owner: "xiaomi",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: ["proprietary/system/lib64/libcamera_algoup_jni.xiaomi.so"],
+        },
+    },
+    compile_multilib: "64",
+    check_elf_files: false,
+    prefer: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libcamera_ispinterface_jni.xiaomi",
+    owner: "xiaomi",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: ["proprietary/system/lib64/libcamera_ispinterface_jni.xiaomi.so"],
+        },
+    },
+    compile_multilib: "64",
+    check_elf_files: false,
+    prefer: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libcamera_mianode_jni.xiaomi",
+    owner: "xiaomi",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: ["proprietary/system/lib64/libcamera_mianode_jni.xiaomi.so"],
+        },
+    },
+    compile_multilib: "64",
+    check_elf_files: false,
+    prefer: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libmtkisp_metadata_sys",
+    owner: "xiaomi",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: ["proprietary/system/lib64/libmtkisp_metadata_sys.so"],
+        },
+    },
+    compile_multilib: "64",
+    check_elf_files: false,
+    prefer: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libmialgo_ie_capture",
+    owner: "xiaomi",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: ["proprietary/vendor/lib64/libmialgo_ie_capture.so"],
+        },
+    },
+    compile_multilib: "64",
+    check_elf_files: false,
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libmialgo_sd",
+    owner: "xiaomi",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: ["proprietary/vendor/lib64/libmialgo_sd.so"],
+        },
+    },
+    compile_multilib: "64",
+    check_elf_files: false,
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libmialgo_utils",
+    owner: "xiaomi",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: ["proprietary/vendor/lib64/libmialgo_utils.so"],
+        },
+    },
+    compile_multilib: "64",
+    check_elf_files: false,
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libmialgo_video_enhance",
+    owner: "xiaomi",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: ["proprietary/vendor/lib64/libmialgo_video_enhance.so"],
+        },
+    },
+    compile_multilib: "64",
+    check_elf_files: false,
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libmialgoengine",
+    owner: "xiaomi",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: ["proprietary/vendor/lib64/libmialgoengine.so"],
+        },
+    },
+    compile_multilib: "64",
+    check_elf_files: false,
+    prefer: true,
+    soc_specific: true,
+    shared_libs: ["libutils-v32-nocs"],
+}
+
+cc_prebuilt_library_shared {
+    name: "libmialgoengine2",
+    owner: "xiaomi",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: ["proprietary/vendor/lib64/libmialgoengine2.so"],
+        },
+    },
+    compile_multilib: "64",
+    check_elf_files: false,
+    prefer: true,
+    soc_specific: true,
+    shared_libs: ["libutils-v32-nocs"],
+}
+
+// Copy of the Lineage libutils-v32 prebuilt without the CallStack hooks. The stock MiAlgo
+// engine destroys hundreds of RefBase objects on every camera mode switch, each of them
+// would print a 60 frame backtrace and the mode switch takes 5 seconds.
+cc_prebuilt_library_shared {
+    name: "libutils-v32-nocs",
+    owner: "xiaomi",
+    strip: {
+        none: true,
+    },
+    shared_libs: [
+        "libc++",
+        "libcutils",
+        "liblog",
+        "libprocessgroup",
+        "libprocessgroup_shim",
+        "libvndksupport",
+    ],
+    target: {
+        android_arm64: {
+            srcs: ["proprietary/vendor/lib64/libutils-v32-nocs.so"],
+        },
+    },
+    compile_multilib: "64",
+    check_elf_files: false,
+    soc_specific: true,
+}

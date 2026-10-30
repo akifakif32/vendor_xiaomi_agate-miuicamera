@@ -1,3 +1,6 @@
-# MiuiCamera uses the ISP HAL, same as stock: hal_mtk_bgs client and binder into the camera HAL
+# MiuiCamera uses the ISP HAL, same as stock: hal_mtk_bgs client and binder into the camera HAL.
+# The app targets SDK <= 36 so it runs as platform_app_36, not platform_app.
 hal_client_domain(platform_app, hal_mtk_bgs)
+hal_client_domain(platform_app_36, hal_mtk_bgs)
 binder_call(platform_app, mtk_hal_camera)
+binder_call(platform_app_36, mtk_hal_camera)

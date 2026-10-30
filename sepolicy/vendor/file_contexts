@@ -1,2 +1,2 @@
 # MiuiCamera: let the privileged app load the MiAlgo libraries from vendor
-/(vendor|system/vendor)/lib64/(libmialgo(engine|engine2|_ie_capture|_sd|_utils|_video_enhance)|libutils-v32-nocs)\.so      u:object_r:same_process_hal_file:s0
+/(vendor|system/vendor)/lib64/(libmialgo(engine|engine2|_ie_capture|_sd|_utils|_video_enhance)|libutils-v32-nocs|libprocessgroup_shim)\.so      u:object_r:same_process_hal_file:s0

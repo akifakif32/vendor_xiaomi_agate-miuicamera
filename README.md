@@ -31,6 +31,10 @@ cd vendor/xiaomi/agate-miuicamera
   `Surface::connect` as soon as a picture is taken with HDR off. The listener only logs in
   `onBufferReleased`, so the fixup in `extract-files.py` makes it connect without one
   (`stur x23, [x29, #-0x60]` -> `stur xzr, [x29, #-0x60]` in `setupOutputStream`).
+- `libcamera_algoup_jni` connects the output surface of the MiAlgo engine through the A12 vtable
+  slot of `Surface::connect` (+0x158). The new libgui has it at +0x150, so the surface was never
+  connected and every picture processed by the engine (flash, night, AI) never got its output buffer.
+  The fixup in `extract-files.py` points the call to the right slot and connects without the listener.
 - The stock `vendor/etc/public.libraries.txt` is installed as is. Apps can only load the vendor
   libraries listed in it. Without it `libDocumentProcess` (Documents mode) cannot find
   `libOpenCL.so` and the camera crashes when the mode is selected.

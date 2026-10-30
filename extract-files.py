@@ -64,6 +64,14 @@ lib_fixups: lib_fixups_user_type = {
 }
 
 blob_fixups: blob_fixups_user_type = {
+    # The algo JNI connects the output surface with Surface::connect(api, listener, bool), the
+    # A12 vtable slot +0x158. The new libgui has a single connect overload at +0x150, +0x158 is
+    # another method so the surface was never connected and the engine failed with
+    # "BufferQueue has no connected producer". Same slot fix as onyx. The listener is built
+    # against the A12 vtable too, so connect without one (str x22, [sp] -> str xzr, [sp]).
+    'system/lib64/libcamera_algoup_jni.xiaomi.so': blob_fixup()
+        .sig_replace('08 AD 40 F9', '08 A9 40 F9')
+        .sig_replace('F6 D7 40 A9 F6 03 00 F9', 'F6 D7 40 A9 FF 03 00 F9'),
     # The listener is built against the A12 IProducerListener vtable, the new libgui calls
     # four slots that do not exist in it (needs*Notify) and crashes in Surface::connect.
     # Its only job is a log line in onBufferReleased, so connect with no listener:

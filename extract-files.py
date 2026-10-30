@@ -64,8 +64,13 @@ lib_fixups: lib_fixups_user_type = {
 }
 
 blob_fixups: blob_fixups_user_type = {
+    # The listener is built against the A12 IProducerListener vtable, the new libgui calls
+    # four slots that do not exist in it (needs*Notify) and crashes in Surface::connect.
+    # Its only job is a log line in onBufferReleased, so connect with no listener:
+    # stur x23, [x29, #-0x60] -> stur xzr, [x29, #-0x60] in setupOutputStream
     'system/lib64/libcamera_ispinterface_jni.xiaomi.so': blob_fixup()
-        .replace_needed('vendor.mediatek.hardware.camera.isphal@1.0.so', 'vendor.mediatek.hardware.camera.isphal-sys@1.0.so'),
+        .replace_needed('vendor.mediatek.hardware.camera.isphal@1.0.so', 'vendor.mediatek.hardware.camera.isphal-sys@1.0.so')
+        .sig_replace('B7 03 1A F8', 'BF 03 1A F8'),
     ('vendor/lib64/libmialgoengine.so', 'vendor/lib64/libmialgoengine2.so'): blob_fixup()
         .replace_needed('libutils.so', 'libutils-v32-nocs.so'),
     'vendor/lib64/libutils-v32-nocs.so': blob_fixup()

@@ -26,6 +26,11 @@ cd vendor/xiaomi/agate-miuicamera
   `isphal-sys@1.0` (soname and `NEEDED` of the JNI renamed in `extract-files.py`) so the module
   does not collide with the vendor one from `vendor/xiaomi/agate`. Without it taking a
   picture with HDR off (SuperNight / parallel burst path) crashes the app.
+- `libcamera_ispinterface_jni` registers an `IProducerListener` built against the A12 vtable. The
+  new libgui calls four slots that class does not have (`needs*Notify`) and the app crashes in
+  `Surface::connect` as soon as a picture is taken with HDR off. The listener only logs in
+  `onBufferReleased`, so the fixup in `extract-files.py` makes it connect without one
+  (`stur x23, [x29, #-0x60]` -> `stur xzr, [x29, #-0x60]` in `setupOutputStream`).
 - The other MiAlgo libraries (`libmialgo_utils`, `_sd`, `_video_enhance`, `_ie_capture`) are used
   by the camera HAL and come from the device blob repo (`vendor/xiaomi/agate`).
 

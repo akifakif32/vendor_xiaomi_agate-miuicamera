@@ -31,6 +31,9 @@ cd vendor/xiaomi/agate-miuicamera
   `Surface::connect` as soon as a picture is taken with HDR off. The listener only logs in
   `onBufferReleased`, so the fixup in `extract-files.py` makes it connect without one
   (`stur x23, [x29, #-0x60]` -> `stur xzr, [x29, #-0x60]` in `setupOutputStream`).
+- The stock `vendor/etc/public.libraries.txt` is installed as is. Apps can only load the vendor
+  libraries listed in it. Without it `libDocumentProcess` (Documents mode) cannot find
+  `libOpenCL.so` and the camera crashes when the mode is selected.
 - The other MiAlgo libraries (`libmialgo_utils`, `_sd`, `_video_enhance`, `_ie_capture`) are used
   by the camera HAL and come from the device blob repo (`vendor/xiaomi/agate`).
 

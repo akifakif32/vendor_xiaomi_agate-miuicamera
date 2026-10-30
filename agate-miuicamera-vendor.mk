@@ -7,7 +7,8 @@ PRODUCT_SOONG_NAMESPACES += \
 
 PRODUCT_COPY_FILES += \
     vendor/xiaomi/agate-miuicamera/proprietary/product/etc/device_features/agate.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/device_features/agate.xml \
-    vendor/xiaomi/agate-miuicamera/proprietary/product/etc/device_features/amber.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/device_features/amber.xml
+    vendor/xiaomi/agate-miuicamera/proprietary/product/etc/device_features/amber.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/device_features/amber.xml \
+    vendor/xiaomi/agate-miuicamera/proprietary/vendor/etc/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
 
 PRODUCT_PACKAGES += \
     libcamera_algoup_jni.xiaomi \

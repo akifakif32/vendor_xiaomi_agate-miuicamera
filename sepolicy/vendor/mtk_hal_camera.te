@@ -1,0 +1,3 @@
+# The camera HAL tells its own feature code which app it serves (Night mode sets it to rawsupernight)
+set_prop(mtk_hal_camera, vendor_camera_appcontrol_prop)
+get_prop(mtk_hal_camera, vendor_camera_appcontrol_prop)

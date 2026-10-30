@@ -64,6 +64,8 @@ lib_fixups: lib_fixups_user_type = {
 }
 
 blob_fixups: blob_fixups_user_type = {
+    'system/lib64/libcamera_ispinterface_jni.xiaomi.so': blob_fixup()
+        .replace_needed('vendor.mediatek.hardware.camera.isphal@1.0.so', 'vendor.mediatek.hardware.camera.isphal-sys@1.0.so'),
     ('vendor/lib64/libmialgoengine.so', 'vendor/lib64/libmialgoengine2.so'): blob_fixup()
         .replace_needed('libutils.so', 'libutils-v32-nocs.so'),
     'vendor/lib64/libutils-v32-nocs.so': blob_fixup()

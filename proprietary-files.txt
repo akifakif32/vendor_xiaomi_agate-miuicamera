@@ -9,6 +9,10 @@ system/lib64/libcamera_ispinterface_jni.xiaomi.so;DISABLE_CHECKELF
 system/lib64/libcamera_mianode_jni.xiaomi.so;DISABLE_CHECKELF
 system/lib64/libmtkisp_metadata_sys.so;DISABLE_CHECKELF
 
+# The ISP JNI links against the isphal HIDL stub, which an app in /system cannot reach in
+# /vendor. Own copy under another name so it does not collide with the vendor one.
+system/lib64/vendor.mediatek.hardware.camera.isphal@1.0.so:system/lib64/vendor.mediatek.hardware.camera.isphal-sys@1.0.so;DISABLE_CHECKELF;FIX_SONAME
+
 # MiAlgo engine, linked against the CallStack free libutils below
 vendor/lib64/libmialgoengine.so;DISABLE_CHECKELF
 vendor/lib64/libmialgoengine2.so;DISABLE_CHECKELF

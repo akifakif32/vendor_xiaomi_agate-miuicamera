@@ -21,6 +21,11 @@ cd vendor/xiaomi/agate-miuicamera
   `extract-files.py`, needs `hardware/lineage` in the tree). The stock engine destroys hundreds
   of RefBase objects on every camera mode switch, with a normal `libutils` each of them prints
   a backtrace and a mode switch takes several seconds.
+- `libcamera_ispinterface_jni` needs the `isphal@1.0` HIDL stub. The stock firmware ships a copy
+  in `/system/lib64`, an app there cannot see the one in `/vendor`. It is installed as
+  `isphal-sys@1.0` (soname and `NEEDED` of the JNI renamed in `extract-files.py`) so the module
+  does not collide with the vendor one from `vendor/xiaomi/agate`. Without it taking a
+  picture with HDR off (SuperNight / parallel burst path) crashes the app.
 - The other MiAlgo libraries (`libmialgo_utils`, `_sd`, `_video_enhance`, `_ie_capture`) are used
   by the camera HAL and come from the device blob repo (`vendor/xiaomi/agate`).
 

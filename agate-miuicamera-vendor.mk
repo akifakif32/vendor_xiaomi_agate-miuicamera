@@ -14,6 +14,7 @@ PRODUCT_PACKAGES += \
     libcamera_ispinterface_jni.xiaomi \
     libcamera_mianode_jni.xiaomi \
     libmtkisp_metadata_sys \
+    vendor.mediatek.hardware.camera.isphal-sys@1.0 \
     libmialgoengine \
     libmialgoengine2 \
     libutils-v32-nocs \

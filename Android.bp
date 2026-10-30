@@ -67,7 +67,7 @@ cc_prebuilt_library_shared {
                 "libui",
                 "libutils",
                 "libvndksupport",
-                "vendor.mediatek.hardware.camera.isphal@1.0",
+                "vendor.mediatek.hardware.camera.isphal-sys@1.0",
                 "libmtkisp_metadata_sys",
                 "libc++",
                 "libc",
@@ -128,6 +128,36 @@ cc_prebuilt_library_shared {
             shared_libs: [
                 "liblog",
                 "libutils",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    check_elf_files: false,
+    prefer: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "vendor.mediatek.hardware.camera.isphal-sys@1.0",
+    owner: "xiaomi",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/system/lib64/vendor.mediatek.hardware.camera.isphal-sys@1.0.so",
+            ],
+            shared_libs: [
+                "android.hardware.graphics.common@1.0",
+                "android.hardware.graphics.common@1.1",
+                "libhidlbase",
+                "liblog",
+                "libutils",
+                "libcutils",
                 "libc++",
                 "libc",
                 "libm",

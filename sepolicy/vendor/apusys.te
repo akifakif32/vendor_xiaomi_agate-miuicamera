@@ -1,0 +1,9 @@
+# MTK APUsys device node
+#
+# The MiAlgo AI plugins open /dev/apusys with O_RDWR from the platform_app_36 domain,
+# i.e. as a subject at s0:c512,c768, while the node is at s0. The platform chr_file write
+# MLS constraint only lets a category carrying app write to the node when the object type is
+# in mlstrustedobject (the read constraint uses "dom l1 l2" which s0:c512,c768 satisfies).
+# Without this the open fails with EACCES even though the platform_app_36 type rules allow
+# read/write/open on apusys_device, and libapusys aborts in apusysEngine::apusysEngine.
+typeattribute apusys_device mlstrustedobject;

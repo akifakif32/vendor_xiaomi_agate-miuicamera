@@ -6,3 +6,6 @@
 
 # Dependencies of the MiAlgo plugins and arcsoft libraries, the engine loads them inside the app
 /(vendor|system/vendor)/lib(64)?/(libc\+\+_shared|libanc_dc_base|libbeauty_face_interface|libion_ulit|libtrm|libmtkrillog)\.so    u:object_r:same_process_hal_file:s0
+
+# libneuron_adapter dlopens these by name inside the camera app (CmdlLibManager, ArmnnLibManager)
+/(vendor|system/vendor)/lib(64)?/(libcmdl|libarmnn|libcmdl_ndk\.mtk\.vndk|libarmnn_ndk\.mtk\.vndk|libnir_neon_driver|libnir_neon_driver_ndk\.mtk\.vndk|libneuron_platform|libneuron_wrapper|libneuron_graph_delegate\.mtk|libapu_mdw|libapu_mdw_batch|libapusys_edma)\.so    u:object_r:same_process_hal_file:s0
